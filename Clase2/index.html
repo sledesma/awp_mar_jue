@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>SuperLista</title>
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="vendor/css/materialize.min.css" />
+        
+        <link rel="stylesheet" href="resources/css/styles.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+	</head>
+	<body>
+		<nav id="navBar">
+			<div class="nav-wrapper">
+                <a href="#" class="brand-logo">SuperLista</a>
+
+                <a href="#" data-target="mobileMenu" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#" id="btnAgregar">
+                        <i class="material-icons">add</i>
+                    </a></li>
+					<li><a href="#modalBusqueda" class="modal-trigger" id="modalTrigger">
+                        <i class="material-icons">search</i>
+                    </a></li>
+				</ul>
+			</div>
+        </nav>
+
+        <div>
+            <ul class="collapsible" id="listaTareas"></ul>
+        </div>
+
+
+        <!-- Elementos mostrados por momentos -->
+        <ul class="sidenav" id="mobileMenu">					
+            <li>
+                <a href="#">
+                    <i class="material-icons">add</i> Agregar
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="material-icons">search</i> Buscar
+                </a>
+            </li>
+        </ul>
+
+        <div id="modalBusqueda" class="modal">
+            <div class="modal-content">
+                <input id="busqueda" type="text">
+                <label for="busqueda">Introduce tu búsqueda y presiona Enter (Si quieres mostrar todos los items, deja el campo vacío y presiona Enter)</label>
+            </div>
+        </div>
+
+        <script src="vendor/js/materialize.min.js"></script>
+        <script src="resources/js/main.js"></script>
+	</body>
+</html>
