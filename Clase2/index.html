@@ -24,13 +24,20 @@
                 </a>
 
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="#" id="btnAgregar">
-                        <i class="material-icons">add</i>
-                    </a></li>
-					<li><a href="#modalBusqueda" class="modal-trigger" id="modalTrigger">
+                    <li>
+                        <a href="#modalAgregar" class="modal-trigger" id="btnModalAgregar">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </li>
+					<li>
                         <i class="material-icons">search</i>
-                    </a></li>
-				</ul>
+                    </li>
+                    <li>
+                        <input type="search" id="txtBuscar">
+                    </li>
+                </ul>
+
+
 			</div>
         </nav>
 
@@ -53,10 +60,22 @@
             </li>
         </ul>
 
-        <div id="modalBusqueda" class="modal">
+        <div id="modalAgregar" class="modal">
             <div class="modal-content">
-                <input id="busqueda" type="text">
-                <label for="busqueda">Introduce tu búsqueda y presiona Enter (Si quieres mostrar todos los items, deja el campo vacío y presiona Enter)</label>
+              <h4>Agregar una nueva tarea</h4>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="nombreNuevaTarea" type="text">
+                  <label for="nombreNuevaTarea">Nombre</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="descripcionNuevaTarea" type="text">
+                  <label for="descripcionNuevaTarea">Descripcion</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" id="btnAgregar" class="modal-close waves-effect waves-green btn-flat">Agregar</a>
             </div>
         </div>
 

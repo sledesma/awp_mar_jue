@@ -13,3 +13,7 @@
     padding: 30px;
     justify-content: space-between;
 }
+
+input {
+    border-bottom: 1px solid white !important;
+}
