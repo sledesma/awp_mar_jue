@@ -1,0 +1,34 @@
+NECESARIAS (Core)   
+    * Segura (HTTPS)
+    * Instalable
+    * Offline-First
+
+DESEABLES (Extras)
+    * Diseño Mobile-First y optimizado para pantallas más chicas
+    * Notificaciones Push
+
+
+
+Instalador
+... de un programa:
+    * Archivo que depende del sistema
+        .exe / .msi (Windows)
+        .deb (Linux)
+        .dmg (Mac)
+
+... de una AWP:
+    * Una confirmación en el navegador (Independiente del sistema operativo)
+
+
+Proceso de Instalacion 
+...de un programa:
+    * Copiar archivos
+    * Realizar configuraciones necesarias
+
+
+...de una AWP:
+    * Copiar archivos estáticos (html, css, etc.) a la CACHE del Navegador
+    * Configurar el comportamiento Offline-First (ServiceWorker)
+
+CREAR LAS OPCIONES DE INSTALACION
+    Configurar el instalador. DAR AL BROWSER LA POSIBILIDAD DE INSTALAR ESTE SITIO
