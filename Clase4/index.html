@@ -12,17 +12,58 @@
 
 		<main></main>
 
-		<script>
-			// https://5fc8e95d2af77700165adf86.mockapi.io/usuarios
+    <script>
 
-			fetch("https://5fc8e95d2af77700165adf86.mockapi.io/usuarios")
-				.then((res) => res.json())
-				.then((data) => {
+        /**
+         * AWAIT
+         * ¿Que es?
+         * Un operador
+         * 
+         * ¿Para que sirve?
+         * Sirve para pausar la ejecución del programa, hasta
+         * que una promesa se resuelva. Sirve cuando tengo
+         * promesas que dependen de la resolución de otras
+         * promesas.
+         * 
+         * ¿Cómo se usa?
+         * 1) En un contexto asincrónico (async function)
+        */
+        /*
+        W -----------------------------------
+
+            P1----------------
+                              P3---------
+
+                P2------------------------
+        */
+
+        async function resolveDependencies(mapDependencies) {
+            const deps = {};
+            for (const key in mapDependencies) {
+                if (Object.hasOwnProperty.call(mapDependencies, key)) {
+                    const url = mapDependencies[key];
+                    
+                    const res = await fetch(url); // Promise<Response>
+                    const data = await res.json(); // Error
+
+                    // YA TENEMOS EL JSON
+                    deps[key] = data;
+                }
+            }
+            return deps;
+        }
+
+        resolveDependencies({
+            usuarios: "https://5fc8e95d2af77700165adf86.mockapi.io/usuarios",
+            posts: "https://jsonplaceholder.typicode.com/posts"
+        }).then(deps => {
+            console.log(deps);
 					document
 						.querySelectorAll(".search")
 						.forEach((searchBox) => {
 							searchBox.addEventListener("input", (e) => {
-								const mostrar = data.filter(
+                                console.log(e);
+								const mostrar = deps.usuarios.filter(
 									(val) =>
 										val.nombre.includes(e.target.value) ||
 										val.apellido.includes(e.target.value)
@@ -41,7 +82,10 @@
 								);
 							});
 						});
-				});
-		</script>
-	</body>
+                
+        });
+
+    </script>
+
+</body>
 </html>

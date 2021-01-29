@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<nav>
+			<input type="search" class="search" />
+		</nav>
+
+		<main></main>
+
+		<script>
+			// https://5fc8e95d2af77700165adf86.mockapi.io/usuarios
+
+			fetch("https://5fc8e95d2af77700165adf86.mockapi.io/usuarios")
+                .then((res) => res.json())
+				.then((data) => {
+					document
+						.querySelectorAll(".search")
+						.forEach((searchBox) => {
+							searchBox.addEventListener("input", (e) => {
+                                console.log(e);
+								const mostrar = data.filter(
+									(val) =>
+										val.nombre.includes(e.target.value) ||
+										val.apellido.includes(e.target.value)
+								);
+
+								document.querySelector(
+									"main"
+								).innerHTML = mostrar.reduce(
+                                    (prev, actual) => prev + `
+                                        <div>
+                                            <h2>${actual.nombre} ${actual.apellido}</h2>
+                                            ${actual.id}
+                                        </div>
+                                    `,
+									""
+								);
+							});
+						});
+                });
+
+                /**
+                 * RETORNO
+                 * map => Retorna la MISMA cantidad de items (array)
+                 * filter => Retorna MENOS items (array)
+                 * reduce => Retorna UN SOLO valor (NO array)
+                */
+		</script>
+	</body>
+</html>
