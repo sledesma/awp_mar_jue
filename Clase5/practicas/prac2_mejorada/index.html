@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="number" data-model="numero1">
+    <input type="number" data-model="numero2">
+    <input type="number" data-model="numero3">
+
+    <button data-operation="sumar@numero1,numero3">Sumar</button>
+    <button data-operation="restar@numero1,numero2">Restar</button>
+    <button data-operation="multiplicar@numero2,numero1">Multiplicar</button>
+    <button data-operation="dividir@numero3,numero1">Dividir</button>
+
+    <div id="respuesta"></div>
+
+    <script src="resources/js/main.js"></script>
+</body>
+</html>
