@@ -1,0 +1,19 @@
+El patrón OFFLINE-FIRST / PRECACHEO consiste en
+    1. Examinar si lo que estoy pidiendo existe en un dispositivo OFFLINE
+    2. Si existe, lo leo desde ese dispositivo.
+    3. Si no existe, lo traigo desde la red y lo alamaceno en el dispositivo OFFLINE para tenerlo disponible luego
+
+ServiceWorker
+
+1) ¿Que es?
+Es una implementación de la API Worker
+
+2) ¿Para que sirve?
+Sirve para interceptar las peticiones HTTP SALIENTES
+
+3) ¿Cómo se implementa?
+Se implementa como un proxy de red programable, a través de tres
+eventos principales:
+    INSTALL
+    ACTIVATE
+    FETCH

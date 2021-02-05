@@ -1,0 +1,19 @@
+#navBar {
+    background-color: cornflowerblue;
+    padding-left: 20px;
+    box-sizing: border-box;
+    padding-right: 20px;
+}
+
+#listaTareas {
+    padding: 10px;
+}
+
+.collapsible-header {
+    padding: 30px;
+    justify-content: space-between;
+}
+
+input {
+    border-bottom: 1px solid white !important;
+}
