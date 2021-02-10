@@ -1,4 +1,4 @@
-const CACHE_VERSION = "1";
+const CACHE_VERSION = "3";
 (VENDOR_CACHE_NAME = "SL_INMUTABLE_CACHE_V" + CACHE_VERSION),
 	(VENDOR_CACHE_FILES = [
 		"/vendor/css/materialize.min.css",
@@ -35,7 +35,30 @@ self.addEventListener("install", (e) => {
 	e.waitUntil(promesaCache());
 });
 
-self.addEventListener("activate", (e) => {});
+self.addEventListener("activate", (e) => {
+	const actualizarCache = async function () {
+		const whiteList = [
+			VENDOR_CACHE_NAME,
+			SITE_CACHE_NAME,
+			DINAMICA_CACHE_NAME,
+		];
+
+		const cachesActuales = await caches.keys();
+
+		const aBorrar = cachesActuales.filter(
+			(val) => !whiteList.includes(val)
+		);
+
+		for (let i = 0; i < aBorrar.length; i++) {
+			const el = aBorrar[i];
+			await caches.delete(el);
+		}
+
+		return true;
+	};
+
+	e.waitUntil(actualizarCache());
+});
 
 self.addEventListener("fetch", (e) => {
 	/*
@@ -61,21 +84,19 @@ self.addEventListener("fetch", (e) => {
 		e.respondWith(res);
 	});*/
 
-
 	e.respondWith(
-		caches.match(e.request).then(res => {
-			if(res) {
+		caches.match(e.request).then((res) => {
+			if (res) {
 				console.log("[SW] Respondiendo desde la cache");
-				return res;				
+				return res;
 			} else {
-				return fetch(e.request).then(fetchRes => {
-					caches.open(DINAMICA_CACHE_NAME).then(cacheDin => {
+				return fetch(e.request).then((fetchRes) => {
+					caches.open(DINAMICA_CACHE_NAME).then((cacheDin) => {
 						cacheDin.put(e.request, fetchRes);
 					});
 					return fetchRes;
-				})
+				});
 			}
 		})
 	);
-
 });
