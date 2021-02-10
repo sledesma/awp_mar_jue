@@ -1,0 +1,19 @@
+{
+    "short_name": "SLista",
+    "name": "SuperLista",
+    "icons": [
+        {
+            "src": "resources/icons/cart_192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "resources/icons/cart_512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone"
+}
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>SuperLista</title>
+
+		<link
+			href="vendor/css/material-icons.css"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="vendor/css/materialize.min.css" />
+
+		<link rel="stylesheet" href="resources/css/styles.css" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="manifest" href="manifest.json" />
+	</head>
+	<body>
+		<nav id="navBar">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">SuperLista</a>
+
+				<a href="#" data-target="mobileMenu" class="sidenav-trigger">
+					<i class="material-icons">menu</i>
+				</a>
+
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li>
+						<a
+							href="#modalAgregar"
+							class="modal-trigger"
+							id="btnModalAgregar"
+						>
+							<i class="material-icons">add</i>
+						</a>
+					</li>
+					<li>
+						<i class="material-icons">search</i>
+					</li>
+					<li>
+						<input type="search" id="txtBuscar" />
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div>
+			<ul class="collapsible" id="listaTareas"></ul>
+		</div>
+
+		<!-- Elementos mostrados por momentos -->
+		<ul class="sidenav" id="mobileMenu">
+			<li>
+				<a href="#"> <i class="material-icons">add</i> Agregar </a>
+			</li>
+			<li>
+				<a href="#"> <i class="material-icons">search</i> Buscar </a>
+			</li>
+		</ul>
+
+		<div id="modalAgregar" class="modal">
+			<div class="modal-content">
+				<h4>Agregar una nueva tarea</h4>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="nombreNuevaTarea" type="text" />
+						<label for="nombreNuevaTarea">Nombre</label>
+					</div>
+					<div class="input-field col s12">
+						<input id="descripcionNuevaTarea" type="text" />
+						<label for="descripcionNuevaTarea">Descripcion</label>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a
+					href="#!"
+					id="btnAgregar"
+					class="modal-close waves-effect waves-green btn-flat"
+					>Agregar</a
+				>
+			</div>
+		</div>
+
+		<script src="vendor/js/materialize.min.js"></script>
+		<script src="resources/js/main.js"></script>
+		<script>
+			(async function () {
+                const 
+                    /**
+					 * Registracion del SW
+					 */
+					registration = await navigator.serviceWorker.register(
+						"sw.js"
+					),
+					/**
+					 * Posts (pruebas)
+					 */
+					posts = (async function () {
+						const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+						const data = await res.json();
+						return data;
+					})();
+
+				return {
+                    sw: registration,
+                    posts: posts
+				};
+			})().then(function (deps) {
+				console.log("Service Worker registrado", deps.sw);
+			});
+		</script>
+	</body>
+</html>
