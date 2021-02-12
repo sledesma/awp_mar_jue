@@ -1,43 +1,52 @@
-const express = require('express');
-const webPush = require('web-push');
-const cors = require('cors');
+const /**
+	 * Acceso a rutas
+	 */
+	path = require("path"),
+	/**
+	 * Librería express
+	 */
+	express = require("express"),
+	/**
+	 * Para acceso de distinto origen
+	 */
+	cors = require("cors"),
+	/**
+	 * Core de Web Push
+	 */
+	webPush = require("web-push"),
+	/**
+	 * VAPID Keys
+	 */
+	keys = {
+		publicKey:
+			"BKqN2N4a1KbvDworXGT7dnXOXH-P1rPT06fQVpojF5q_k0iAlxLmx9mpfwRCbaNKaUaGflHsZtKZNlKsk1IDnF8",
+		privateKey: "9IUHplJM2SBsPni87CvoaBGFrRtSBrBPp7rks6PGugI",
+	};
 
-const server = express();
+webPush.setVapidDetails('mailto:prfsebastianledesma@gmail.com', keys.publicKey, keys.privateKey);
+/**
+ * Aplicación Express
+ */
+server = express();
 
-server.use('/admin', function(req, res, next){
-    console.log('[RH] Peticion ', req);
-    req.mensaje = 'Hola nena';
-    next();
+server.use(cors());
+server.use(express.json());
+server.use(express.static(path.join(__dirname, "public")));
+
+server.get("/posts", function (req, res) {
+	res.send([
+		{ id: 1, titulo: "Titulo 1" },
+		{ id: 2, titulo: "Titulo 2" },
+	]);
 });
 
-server.get('/', function(req, res){
-    // ACA TENGO LA PETICION HTTP HABIENDO YA
-    // PASADO POR TODOS LOS REQUESTHANDLER.
-    if(req.mensaje)
-        res.send(req.mensaje)
-    else
-        res.send('Hola mundo');
+server.post("/push", function (req, res) {
+	// Subscribir
+    webPush.sendNotification(req.body, 'Hola mundo', {});
+
+    res.send({ ok: true });
 });
 
-server.get('/admin', function(req, res){
-    // ACA TENGO LA PETICION HTTP HABIENDO YA
-    // PASADO POR TODOS LOS REQUESTHANDLER.
-    if(req.mensaje)
-        res.send(req.mensaje)
-    else
-        res.send('Hola mundo');
-});
-
-server.get('/admin/msj', function(req, res){
-    // ACA TENGO LA PETICION HTTP HABIENDO YA
-    // PASADO POR TODOS LOS REQUESTHANDLER.
-    if(req.mensaje)
-        res.send(req.mensaje)
-    else
-        res.send('Hola mundo');
-});
-
-
-server.listen(3000, function(){
-    console.log('Servidor ejecutandose en http://localhost:3000');
-});
+server.listen(3000, () =>
+	console.log("Servidor ejecutandose en http://localhost:3000")
+);

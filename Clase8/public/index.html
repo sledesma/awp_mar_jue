@@ -87,22 +87,40 @@
 
 		<script src="vendor/js/materialize.min.js"></script>
 		<script src="resources/js/main.js"></script>
+		<script src="resources/js/urlB64ToUint8Array.js"></script>
 		<script>
 			(async function () {
-                const 
-                    /**
-					 * Registracion del SW
-					 */
-					registration = await navigator.serviceWorker.register(
+                const registration = await navigator.serviceWorker.register(
 						"sw.js"
-					)
+					);
+
+				const push = await registration.pushManager.subscribe({
+					applicationServerKey: urlB64ToUint8Array('BKqN2N4a1KbvDworXGT7dnXOXH-P1rPT06fQVpojF5q_k0iAlxLmx9mpfwRCbaNKaUaGflHsZtKZNlKsk1IDnF8'),
+					userVisibleOnly: true
+				});
+
+				const sendPush = await fetch('/push', {
+					method: 'POST',
+					body: JSON.stringify(push),
+					headers: {
+						'Content-type': 'application/json'
+					}
+				});
+
+				const resPush = await sendPush.json();
 
 				return {
-                    sw: registration
+                    sw: registration,
+					pushState: resPush
 				};
 			})().then(function (deps) {
 				console.log("Service Worker registrado", deps.sw);
+				console.log('Estado de PUSH: ', deps.pushState);
 			});
+
+			fetch('/posts')
+				.then(r => r.json())
+				.then(d => console.log(d));
 		</script>
 	</body>
 </html>

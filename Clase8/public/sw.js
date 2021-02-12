@@ -100,3 +100,11 @@ self.addEventListener("fetch", (e) => {
 		})
 	);
 });
+
+self.addEventListener('push', e => {
+	e.waitUntil(
+		self.registration.showNotification('Mensaje recibido!', {
+			body: 'Tienes novedades'
+		})
+	)
+});
