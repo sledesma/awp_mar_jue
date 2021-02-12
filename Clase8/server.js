@@ -44,7 +44,7 @@ server.post("/push", function (req, res) {
 	// Subscribir
     webPush.sendNotification(req.body, 'Hola mundo', {});
 
-    res.send({ ok: true });
+    res.send({ ok: true }); 
 });
 
 server.listen(3000, () =>
